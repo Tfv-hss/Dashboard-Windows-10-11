@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú del Sistema</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .button {
+            width: 120px;
+            background: none;
+            border: none;
+            color: white;
+            text-align: center;
+        }
+
+        .button img {
+            width: 100%;
+            border-radius: 16px;
+            border: 2px solid #fff;
+            transition: transform 0.2s;
+        }
+
+        .button img:hover {
+            transform: scale(1.1);
+        }
+
+        .button span {
+            display: block;
+            margin-top: 8px;
+        }
+
+        a.back-link {
+            display: block;
+            margin-top: 30px;
+            color: #00bfff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Menú del Sistema</h1>
+    <div class="grid">
+        {% for key, action in actions.items() %}
+        <form action="/run/{{ key }}" method="post">
+            <button type="submit" class="button">
+                <img src="{{ url_for('static', filename='icons/' + action.image) }}" alt="{{ action.label }}">
+                <span>{{ action.label }}</span>
+            </button>
+        </form>
+        {% endfor %}
+    </div>
+
+    <a href="/" class="back-link">← Volver al Panel</a>
+</body>
+</html>
